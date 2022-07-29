@@ -1,0 +1,54 @@
+<div class="container-fluid">
+  
+
+    <form (submit)="addData()"   ngNativeValidate>
+        
+        <div class="bctrow" *ngIf="dataRow">
+            <div class="form-group  text-center font-weight-bold">
+                <label for="user">User</label> 
+                <input type="text" class="form-control" name="user" [(ngModel)]="dataRow.user" 
+                     placeholder="AO Planning " required>
+             </div>
+            <div class="form-group text-center font-weight-bold"> 
+                 <label for="ip">IP Address</label>  
+                 <input type="text" class="form-control" name="ip" [(ngModel)]="dataRow.ip"  required
+               placeholder="10.34.131.120">  
+             </div>
+            <div class="form-group text-center font-weight-bold"> 
+                <label for="">OS</label>  
+                <input type="text" class="form-control" name="OS" [(ngModel)]="dataRow.OS"  required
+              placeholder="Windows 10">  
+            </div>  
+            <div class="form-group text-center font-weight-bold"> 
+                <label for="">CPU Make</label>  
+                <input type="text" class="form-control" name="CPUmake" [(ngModel)]="dataRow.CPUmake"  required
+              placeholder="ACER">  
+            </div>
+            <div class="form-group text-center font-weight-bold"> 
+                <label for="">Location</label>  
+                <input type="text" class="form-control" name="location" [(ngModel)]="dataRow.location"  required
+              placeholder="Fouth Floor">  
+            </div>  
+            <div class="form-group text-center">
+                <br>
+                <input type="hidden" name="_id"  value="{{dataRow._id}}">
+                <button class="btn btn-success"><i class="fa fa-save"> </i> {{dataRow._id ? "Update":"Save"}}</button>
+            </div>
+
+        </div>
+            
+    </form>
+    <div class="bctrow" *ngFor="let x of dataList.data"> 
+        <div>{{x.user}}</div>
+        <div>{{x.ip}}</div>
+        <div>{{x.OS}}</div>
+        <div>{{x.CPUmake}}</div>
+        <div>{{x.location}}</div>    
+        
+        <div>
+            <button class="btn btn-primary" (click)="edit(x)"> <i class="fa fa-edit"></i>  Edit</button>
+        </div>
+    </div>
+
+
+</div>

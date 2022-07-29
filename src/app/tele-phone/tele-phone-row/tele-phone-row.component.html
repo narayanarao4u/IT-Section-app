@@ -1,0 +1,20 @@
+<div class="row">
+
+    <div class="col-md-4" [ngSwitch]="dataRow?.Desgn.substring(0, 3)">
+        <i class="fa fa-user text-primary" aria-hidden="true" *ngSwitchCase="'JTO'"></i>
+        <i class="fa fa-user-circle text-success" aria-hidden="true" *ngSwitchCase="'SDE'"></i>
+        <i class="fa fa-user-circle-o text-danger" aria-hidden="true" *ngSwitchDefault></i>
+            {{dataRow?.Name}}
+    </div>
+    
+    <div class="col-md-3" >{{dataRow?.Desgn}}</div>
+    <div class="col-md-3" >
+        <i class="fa fa-id-badge" aria-hidden="true"></i>
+        {{dataRow?.Phone}}
+    </div>
+    <div class="col-md-2" >
+        <i class="fa fa-mobile fa-lg" aria-hidden="true" (click)='clickEvent()'></i>
+        <a href="tel:+{{dataRow?.Mobile}}">  {{dataRow?.Mobile}} </a>
+     
+    </div>
+</div>

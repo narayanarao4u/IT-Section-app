@@ -1,0 +1,27 @@
+table {
+    margin: 5px;
+    width: 100%;
+    border-collapse: collapse;
+    caption-side: top;
+}
+
+
+table, tr, td ,th {
+    border: 1px solid gray;
+}
+
+caption {
+    text-align: center;
+}
+
+.bgtomato {
+    background-color: tomato;
+}
+
+.hp{
+    background-color: rgb(181, 252, 213);   
+}
+
+.red {
+    background-color: rgb(255, 173, 134);
+}

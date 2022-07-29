@@ -1,0 +1,29 @@
+.row{
+    padding: 5px;
+    border-radius: 5px;
+}
+ .form{
+     background-color: rgb(169, 231, 241);
+     padding: 0 15px; 
+     border-radius: 5px;
+ }
+
+ label {
+     padding: 0 5px;
+     font-weight: bolder;
+ }
+
+ .text-white{
+     font-size: 15px;
+ }
+
+ .datalist{
+     overflow: auto;
+
+ }
+
+ .bctrow{
+     display: grid;
+     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 2fr 0.5fr;
+     column-gap: 2px;
+ }

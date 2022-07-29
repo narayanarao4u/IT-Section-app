@@ -1,0 +1,11 @@
+
+ .bctrow{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 0.5fr;
+    column-gap: 2px;    
+    width: 100%;
+    border-top-width: 1px;
+    border-top-style: solid;
+    padding: 2px;
+    
+}

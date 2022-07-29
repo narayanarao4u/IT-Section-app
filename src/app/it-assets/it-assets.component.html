@@ -1,0 +1,110 @@
+<div class="container-fluid">
+    <h3 class="text-center">IT Section  Assest Data Entry System</h3>
+
+    <div class="row form">
+    <form (submit)="addData()"   ngNativeValidate>
+        
+        <div class="bctrow">
+            <div class="form-group  text-center font-weight-bold">
+                <label for="">Section</label> 
+                <input type="text" class="form-control" name="section" [(ngModel)]="section" 
+                     placeholder="AO Planning " required>
+             </div>
+    
+     
+             <div class="form-group text-center font-weight-bold"> 
+                 <label for="">User</label>  
+                 <input type="text" class="form-control" name="user" [(ngModel)]="user"  required
+               placeholder="AO(Plg)">  
+             </div>   
+
+            <div class="form-group">
+                <label for="type">Type</label>
+                <!-- <input type="text"  class="form-control" name="Type" [(ngModel)]="dataRow.Type" placeholder=" Ex: CPU"> -->
+                <select name="Type" [(ngModel)]="dataRow.Type" class="form-control" required>
+                    <option value="Laptop">Laptop</option>
+                    <option value="CPU">CPU</option>
+                    <option value="Monitor">Monitor</option>                    
+                    <option value="Printer">Printer</option>
+                    <option value="Scanner">Scanner</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="type">Make</label>
+                <input type="text"  class="form-control" name="Make" [(ngModel)]="dataRow.Make" required
+                placeholder=" Ex: CANON" #make="ngModel">
+                
+            </div>
+            <div class="form-group ">
+                <label for="type">ModelNo</label>
+                <input type="text"  class="form-control" name="Model" [(ngModel)]="dataRow.Model" required
+                placeholder=" Ex: MF4450">
+            </div>
+            
+            <div class="form-group">
+                <label for="type">SerialNo</label>
+                <input type="text"  class="form-control" name="SerailNo" [(ngModel)]="dataRow.SerailNo">
+            </div>
+            <div class="form-group">
+                <label for="type">Remark</label>
+                <textarea type="text"  class="form-control" name="Remark" [(ngModel)]="dataRow.Remark">
+                    
+                </textarea>
+            </div>
+            <!-- <div class="form-group">
+                <label for="type">User</label>
+                <input type="text"  class="form-control" name="User" [(ngModel)]="dataRow.User">
+            </div>
+            <div class="form-group">
+                <label for="type">Section</label>
+                <input type="text"  class="form-control" name="Section" [(ngModel)]="dataRow.Section">
+            </div> -->
+            <div class="form-group text-center">
+                <br>
+                <input type="hidden" name="_id"  value="{{dataRow._id}}">
+                <button class="btn btn-success"><i class="fa fa-save"> </i> 
+                    {{dataRow._id ? "Update":"Save"}}</button>
+            </div>
+
+        </div>
+            
+        </form>
+
+    </div>  
+  
+    <div *ngIf="dataList" class="datalist">
+         <div class="row bg-secondary text-white">
+            <div class="col-md-2">Section / User </div>
+             <div class="col-md-2">Type</div>
+             <div class="col-md-2">Make - Model</div>
+             <div class="col-md-2">Serial No</div>
+             <div class="col-md-3">Remark</div>
+             
+             <div class="col-md-1"></div>
+
+         </div>   
+        <div class="row" *ngFor="let x of dataList.data"> 
+            <div class="col-md-2">
+                {{x.Section}} / {{x.User}}
+            </div>
+            <div class="col-md-2">
+                {{x.Type}}
+            </div>
+            <div class="col-md-2">
+                {{x.Make}} - {{x.Model}} 
+            </div>
+            <div class="col-md-2">
+                {{x.SerailNo}}
+            </div>
+            <div class="col-md-3">
+                {{x.Remark}}
+            </div>
+            
+            <div class="col-md-1">
+                <button class="btn btn-primary  btn-block" (click)="edit(x)"> 
+                    <i class="fa fa-edit"></i>  Edit</button>
+            </div>
+        </div>
+
+    </div>
+</div>

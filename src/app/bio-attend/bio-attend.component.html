@@ -1,0 +1,64 @@
+
+<div class="container-fluid">
+    <p class="h4 text-center hp">Biometric Attendance Data</p>
+    <div class="form-group row">
+        <label for="" class="col-1 col-form-label bgtomato">Employee</label>
+        <div class="col-3 bgtomato">
+          
+            <select class="form-control" [(ngModel)]="datarow.emp">
+                <option *ngFor="let x of empdata" value="{{x.EmployeeCode}}">{{x.AadhaarNumber}}, {{x.EmployeeName}}, {{x.Designation}}</option>
+            </select>
+        </div>
+        <label for="" class="col-2 col-form-label bg-info" >Month</label>
+        <div class="col-2 bg-info">
+            <select class="form-control" [(ngModel)]="datarow.mn">
+                <optgroup label="2022">
+                    <option value="7_2022">07-2022</option>
+                    <option value="6_2022">06-2022</option>
+                    <option value="5_2022">05-2022</option>
+                    <option value="4_2022">04-2022</option>
+                    <option value="3_2022">03-2022</option>
+                    <option value="1_2022">01-2022</option>
+                </optgroup>
+                <optgroup label="2021">
+                    <option value="11_2021">11-2021</option>
+                    <option value="12_2021">12-2021</option>
+                </optgroup>
+            
+            </select>
+        </div>
+        <div class="col-1">
+            <input type="time"  [(ngModel)]="inTime">            
+        </div>
+        <div class="col-1">            
+            <input type="time" [(ngModel)]="outTime">
+        </div>
+        <div class="col-2">
+            <button class="btn btn-success" (click)="getAttendence()">Get Data</button>
+        </div>
+    </div>
+       
+    <div>
+        <table *ngIf="dataList">
+            <caption>{{tcaption}}</caption>
+            <tr>
+                <th>Date</th>
+                <th>In time</th>
+                <th>Out time</th>
+            </tr>
+            <tr *ngFor="let x of dataList ">
+                <td>{{x.logDate}}</td>
+                <td [class]="inTimeClass(x)">
+                    <i class="fa fa-clock-o" aria-hidden="true"></i>
+                     {{x.inTime}}
+                    </td>
+                <td [class]="outTimeClass(x)">
+                    <i class="fa fa-clock-o" aria-hidden="true"></i>
+                    {{x.outTime}}
+                </td>
+            </tr>
+        </table>
+        
+
+    </div>
+</div>

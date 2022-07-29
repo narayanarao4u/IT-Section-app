@@ -1,0 +1,13 @@
+<div class="container">
+    <p>disp-table works!</p>
+    <pre>{{dataList['duty'][2] | json}}</pre>
+    <pre>{{datarow| json}}</pre>
+    <table>
+        <tr *ngFor = "let x of dataList['duty']"> 
+            <td *ngFor = "let i of objectKeys(x)">
+                {{objectKeys(x)}}
+            </td>
+            <td>{{ x | json  }}</td>      
+        </tr>
+    </table>
+</div>
