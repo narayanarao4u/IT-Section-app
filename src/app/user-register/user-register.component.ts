@@ -13,6 +13,11 @@ userData = {
 }
   constructor() { }
 
+  register(){
+    console.log(this.userData);
+    
+  }
+
   ngOnInit(): void {
 
   }

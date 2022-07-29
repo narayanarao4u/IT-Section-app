@@ -8,17 +8,17 @@
                 <form  class="form">
                     <div class="form-group">
                         <label for="">HRMS No</label>
-                        <input type="text" [(ngModel)]="userData.erpno"  class="form-control rounded-0" required>
+                        <input type="text" [(ngModel)]="userData.erpno"  name="erpno" class="form-control rounded-0" required>
                     </div>
                     <div class="form-group">
                         <label for="">Name</label>
-                        <input type="text" [(ngModel)]="userData.name" class="form-control rounded-0" disabled>
+                        <input type="text" [(ngModel)]="userData.name" name="name"class="form-control rounded-0" disabled>
                     </div>
                     <div class="form-group">
                         <label for="">Password</label>
-                        <input type="password" [(ngModel)]="userData.pwd" class="form-control rounded-0" required>
+                        <input type="password" [(ngModel)]="userData.pwd" name="pwd" class="form-control rounded-0" required>
                     </div>
-                    <button type="button" class="btn btn-primary float-right">Register</button>
+                    <button type="button" (click)="register()" class="btn btn-primary float-right">Register</button>
                 </form>
             </div>
         </div>
