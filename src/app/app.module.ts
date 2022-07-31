@@ -10,24 +10,27 @@ import { DispTableComponent } from './disp-table/disp-table.component';
 import { UserRegisterComponent } from './user-register/user-register.component';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { FormsModule } from '@angular/forms';
+import { Error404Component } from './errors/404.component';
+import { AuthService } from './auth.service';
+import { AuthGuard } from './auth.guard';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AppNavComponent, 
+    AppNavComponent,
+    Error404Component,
     DispTableComponent, UserRegisterComponent, UserLoginComponent
   ],
-
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    AppRoutingModule
-   
+    AppRoutingModule   
   ],
 
 
-  providers: [ToastrService],
+  
+  providers: [ToastrService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 

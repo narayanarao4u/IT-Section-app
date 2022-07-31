@@ -14,9 +14,11 @@ export class DispTableComponent implements OnInit {
   constructor(private ds:DataService) { }
 
   getdata(){
-    const url = `http://${this.link}:3000/api-excel/attDutyChart`;
+    const url = `http://${this.link}:3005/api-excel/attDutyChart`;
     this.ds.getdataLink(url).subscribe((res)=>{
       this.dataList = res;
+     
+      
       this.datarow = this.dataList['duty'][2];
     })
   }
@@ -26,7 +28,7 @@ export class DispTableComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getdata()
+    // this.getdata()
   }
 
 }

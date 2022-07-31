@@ -4,18 +4,22 @@ import { FormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { bioAttendRoutes } from "./bio-attend.routes";
 import { BioAttendComponent } from "./bio-attend.component";
+import { AuthService } from "../auth.service";
+import { AuthGuard } from "../auth.guard";
+import { BrowserModule } from "@angular/platform-browser";
 
 
 @NgModule({
     imports:[
-        CommonModule,
+        CommonModule,       
         FormsModule,
         RouterModule.forChild(bioAttendRoutes)
     ],
     declarations:[
         BioAttendComponent
     ],
-    providers:[]
+   
+    providers:[AuthService, AuthGuard]
 })
 
 

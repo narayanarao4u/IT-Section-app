@@ -21,8 +21,7 @@ export class BioAttendComponent implements OnInit {
   inTime = '10:31';
   outTime = '17:29';
 
-  
-  
+   
   
 
   constructor(private ds:DataService, private http:HttpClient) { }
@@ -35,10 +34,24 @@ export class BioAttendComponent implements OnInit {
   }
 
   getAttendence(){
+    console.log('datarow', this.datarow);
+    
     const url = `http://${this.link}:3005/api-attend/memdata`;
     this.http.post(url, this.datarow).subscribe((res)=>{
       this.dataList = res
-      this.tcaption = `Name : ${this.datarow.emp}, Month :  ${this.datarow.mn}`   
+      let a = []
+      a = this.dataList
+      console.log(typeof a[0].logDate);
+      
+      let pv = a.reduce( (a,b) => {
+        a[b.UserID] = a[b.UserID] || [];
+        a[b.UserID].push({[b.logDate]:[b.inTime, b.outTime]});
+        return a;
+    }, {});
+    console.log(pv);
+    
+      this.tcaption = `Name : ${this.datarow.emp}, Month :  ${this.datarow.mn}`  
+
       
     })
 

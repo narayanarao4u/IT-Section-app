@@ -14,8 +14,7 @@ userData = {
   constructor() { }
 
   register(){
-    console.log(this.userData);
-    
+    console.log(this.userData);    
   }
 
   ngOnInit(): void {

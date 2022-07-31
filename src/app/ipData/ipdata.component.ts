@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ipData } from './ipData';
 import { ToastrService } from '../common/toastr.service';
 import { IpDataService } from './ipdata.service';
+import { AuthService } from '../auth.service';
 
 
 @Component({
@@ -12,9 +13,11 @@ import { IpDataService } from './ipdata.service';
 export class IpdataComponent implements OnInit {
 
   dataList:any;
-  dataRow:ipData;
+  dataRow = new ipData();
+  editBtn = false;
 
-  constructor(private ds: IpDataService, private toastr:ToastrService) { }
+  constructor(private ds: IpDataService, private auth:AuthService,
+            private toastr:ToastrService) { }
 
   getlist(){
     this.dataRow = new ipData();
@@ -43,8 +46,11 @@ export class IpdataComponent implements OnInit {
 
   }
 
+  
+  
   ngOnInit(): void {
-   this.getlist()    
+   this.getlist()   
+   this.editBtn = this.auth.loggedIn() 
   }
 
 }
