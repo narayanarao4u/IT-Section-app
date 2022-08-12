@@ -1,18 +1,22 @@
 
 <div class="container-fluid">
-    <p class="h4 text-center hp">Biometric Attendance Data</p>
+    <p class="h4 tezt-center hp">Biometric Attendance Data</p>
     <div class="form-group row">
         <label for="" class="col-1 col-form-label bgtomato">Employee</label>
         <div class="col-3 bgtomato">
-          
+            <!-- <input list="empList1" class="form-control" [(ngModel)]="datarow.emp">
+                <dataList id="empList1">
+                    <option *ngFor="let z of empdata" value="{{z.EmployeeCode}}">{{z.AadhaarNumber}}, {{z.EmployeeName}}, {{z.Designation}}</option>
+                </dataList> -->
             <select class="form-control" [(ngModel)]="datarow.emp">
-                <option *ngFor="let x of empdata" value="{{x.EmployeeCode}}">{{x.AadhaarNumber}}, {{x.EmployeeName}}, {{x.Designation}}</option>
+                <option *ngFor="let z of empdata" value="{{z.EmployeeCode}}">{{z.AadhaarNumber}}, {{z.EmployeeName}}, {{z.Designation}}</option>
             </select>
         </div>
         <label for="" class="col-2 col-form-label bg-info" >Month</label>
         <div class="col-2 bg-info">
             <select class="form-control" [(ngModel)]="datarow.mn">
                 <optgroup label="2022">
+                    <option value="8_2022">08-2022</option>
                     <option value="7_2022">07-2022</option>
                     <option value="6_2022">06-2022</option>
                     <option value="5_2022">05-2022</option>
@@ -23,8 +27,7 @@
                 <optgroup label="2021">
                     <option value="11_2021">11-2021</option>
                     <option value="12_2021">12-2021</option>
-                </optgroup>
-            
+                </optgroup>            
             </select>
         </div>
         <div class="col-1">
@@ -36,9 +39,8 @@
         <div class="col-2">
             <button class="btn btn-success" (click)="getAttendence()">Get Data</button>
         </div>
-    </div>
-       
-    <div>
+    </div>       
+    <div *ngIf="!allemp">
         <table *ngIf="dataList">
             <caption>{{tcaption}}</caption>
             <tr>
@@ -46,19 +48,41 @@
                 <th>In time</th>
                 <th>Out time</th>
             </tr>
-            <tr *ngFor="let x of dataList ">
-                <td>{{x.logDate}}</td>
-                <td [class]="inTimeClass(x)">
+            <tr *ngFor="let z of dataList ">
+                <td>{{z.logDate}}</td>
+                <td [class]="inTimeClass(z)">
                     <i class="fa fa-clock-o" aria-hidden="true"></i>
-                     {{x.inTime}}
+                     {{z.inTime}}
                     </td>
-                <td [class]="outTimeClass(x)">
+                <td [class]="outTimeClass(z)">
                     <i class="fa fa-clock-o" aria-hidden="true"></i>
-                    {{x.outTime}}
+                    {{z.outTime}}
                 </td>
+            </tr>
+        </table>
+    </div>
+    <div  *ngIf="allemp">
+        <!-- {{dataList.15[0].01|json}} -->
+        <table *ngIf="dataList">
+            <tr>
+                <th>Employee</th>
+                <th *ngFor = "let d of days">{{d}}</th>             
+            <tr *ngFor="let z of dataList ">
+
+                <td>{{dispEmp(z['UserID'])}}</td>                 
+                <td *ngFor = "let d of days">
+                    <div [class.red]="dispIntime(z['dt'][d])[1]">{{dispIntime(z['dt'][d])[0]}} </div> 
+                    <div [class.red]="dispOuttime(z['dt'][d])[1]">{{dispOuttime(z['dt'][d])[0]}}</div>
+
+                  
+                </td>
+              
+                
+
             </tr>
         </table>
         
 
+        
     </div>
 </div>

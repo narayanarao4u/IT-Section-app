@@ -13,12 +13,14 @@ import { FormsModule } from '@angular/forms';
 import { Error404Component } from './errors/404.component';
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
+import { BioAttendComponent } from './bio-attend/bio-attend.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AppNavComponent,
     Error404Component,
+    BioAttendComponent,    
     DispTableComponent, UserRegisterComponent, UserLoginComponent
   ],
   imports: [
@@ -27,12 +29,8 @@ import { AuthGuard } from './auth.guard';
     HttpClientModule,
     AppRoutingModule   
   ],
-
-
-  
   providers: [ToastrService, AuthService, AuthGuard],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent]  
 })
-
 
 export class AppModule { }
