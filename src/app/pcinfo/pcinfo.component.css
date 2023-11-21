@@ -1,0 +1,40 @@
+.item {
+    display: grid;
+    grid-template-columns: 150px auto;   
+    border-bottom: 1px solid gray;
+    border-radius: 5px;
+}
+
+.item div:nth-child(odd) {
+    background-color: lightgoldenrodyellow;    
+    background-image: linear-gradient(90deg, lightgoldenrodyellow 20%, rgb(250, 236, 210) 100%);
+}
+.item div:nth-child(2n) {
+    background-image: linear-gradient(45deg, #fdfbfb 20%, #ebedee 100%);
+    padding-left: 5px;
+}
+.item div:nth-child(4n) {
+    background-image: linear-gradient(45deg, #d3fac7 20%, #ebedee 100%);
+    padding-left: 5px;
+}
+
+
+
+.maincontainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;   
+    gap: 10px;
+    
+}
+.borderbottom{
+    border-bottom: 3px dotted gray;
+}
+
+.blur {
+    /* color: transparent;  */
+    color: rgb(160, 159, 159);
+    text-shadow: 0 0 4px rgb(0, 0, 0);
+    /* font-family: 'Carme', sans-serif; */
+    
+
+}

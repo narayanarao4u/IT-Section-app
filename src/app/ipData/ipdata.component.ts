@@ -46,6 +46,13 @@ export class IpdataComponent implements OnInit {
 
   }
 
+  checkIP(x){
+      return this.ds.checkIPStatus(x.ip).subscribe(res => {
+        let a = res['isAlive']
+        x.status = a ? 'Online' : 'Offline'
+        x.class = a ?'bg-success': 'bg-danger'
+      })    
+  }
   
   
   ngOnInit(): void {

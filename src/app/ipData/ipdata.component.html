@@ -36,11 +36,12 @@
     <div *ngIf="dataList">
         <div    class="bctrow" *ngFor="let x of dataList.data">
             <div>{{x.user}}</div>
-            <div>{{x.ip}}</div>
+            <div (click)="checkIP(x)" class="ip"> {{x.ip}}
+                 <i class="fa fa-square-o "  
+                [ngClass] ="x.class" aria-hidden="true"></i> {{x.status}} </div>
             <div>{{x.OS}}</div>
             <div>{{x.CPUmake}}</div>
-            <div>{{x.location}}</div>
-        
+            <div>{{x.location}}</div>        
             <div>
                 <button class="btn btn-primary" (click)="edit(x) " *ngIf="this.editBtn">
                     <i class="fa fa-edit"></i>  Edit</button>

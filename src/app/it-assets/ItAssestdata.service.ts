@@ -1,18 +1,19 @@
 import {HttpClient} from '@angular/common/http'
 import { Injectable } from '@angular/core';
+import { AppDataService } from '../data.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class DataService {
+export class ItAssetDataService {
   // url = "http://localhost:3000/api/assest/"
    
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient, private ds:AppDataService) { }
 
   url(){
     var r = window.location.hostname;
-    var port = 3005
+    var port = this.ds.port;
     return `http://${r}:${port}/api/assest/`;    
   }
   

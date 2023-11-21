@@ -3,6 +3,7 @@ table {
     width: 100%;
     border-collapse: collapse;
     caption-side: top;
+    border-radius: 4px;
 }
 
 
@@ -16,7 +17,7 @@ caption {
 }
 
 .bgtomato {
-    background-color: tomato;
+    background-color: #C5E1A5;
 }
 
 .hp{
@@ -27,6 +28,17 @@ caption {
     background-color: rgb(255, 173, 134);
 }
 
+.Su {
+    background-color: #f4f28f;
+}
+
+th {
+    text-align: center;
+    background-color: lightgrey;
+    position: sticky;
+    top: 0;
+}
+
 td > div:nth-child(1) {
     border-bottom: 0.5px solid green;
     text-align: center;
@@ -34,7 +46,18 @@ td > div:nth-child(1) {
 
 td > div:nth-child(2) {
     border-top: 0.5px solid green;
-    text-align: center;
+    text-align: center;    
 }
 
 tr:hover {background-color: rgb(223, 255, 80);}
+
+.bmr>* {
+ margin-right: 6px;
+}
+.bmr {
+    text-align: center;
+}
+
+input, select {
+    border-radius: 4px;
+}

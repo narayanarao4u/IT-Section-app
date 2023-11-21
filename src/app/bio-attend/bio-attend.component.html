@@ -1,55 +1,64 @@
 
 <div class="container-fluid">
-    <p class="h4 tezt-center hp">Biometric Attendance Data</p>
-    <div class="form-group row">
-        <label for="" class="col-1 col-form-label bgtomato">Employee</label>
-        <div class="col-3 bgtomato">
-            <!-- <input list="empList1" class="form-control" [(ngModel)]="datarow.emp">
+    <p class="h4 text-center hp">Biometric Attendance Data</p>
+    <div class="form-group row bgtomato">
+        <!-- <label for="" class="col-1 col-form-label bgtomato">Employee</label> -->
+        <div class="col-4   d-flex  align-content-center justify-content-around">
+
+           <!-- <input list="empList1"  [(ngModel)]="datarow.emp">
                 <dataList id="empList1">
-                    <option *ngFor="let z of empdata" value="{{z.EmployeeCode}}">{{z.AadhaarNumber}}, {{z.EmployeeName}}, {{z.Designation}}</option>
-                </dataList> -->
-            <select class="form-control" [(ngModel)]="datarow.emp">
+                    <option *ngFor="let z of empdata" value="{{z.EmployeeCode}}"> 
+                        {{z.AadhaarNumber}}, {{z.EmployeeName}}, {{z.Designation}} 
+                    </option>
+                </dataList>  -->
+
+          <select  [(ngModel)]="datarow.emp" [disabled] = "datarow.role != 'ALL'">
                 <option *ngFor="let z of empdata" value="{{z.EmployeeCode}}">{{z.AadhaarNumber}}, {{z.EmployeeName}}, {{z.Designation}}</option>
-            </select>
+            </select> 
         </div>
-        <label for="" class="col-2 col-form-label bg-info" >Month</label>
-        <div class="col-2 bg-info">
-            <select class="form-control" [(ngModel)]="datarow.mn">
-                <optgroup label="2022">
-                    <option value="8_2022">08-2022</option>
-                    <option value="7_2022">07-2022</option>
-                    <option value="6_2022">06-2022</option>
-                    <option value="5_2022">05-2022</option>
-                    <option value="4_2022">04-2022</option>
-                    <option value="3_2022">03-2022</option>
-                    <option value="1_2022">01-2022</option>
-                </optgroup>
-                <optgroup label="2021">
-                    <option value="11_2021">11-2021</option>
-                    <option value="12_2021">12-2021</option>
-                </optgroup>            
-            </select>
-        </div>
-        <div class="col-1">
-            <input type="time"  [(ngModel)]="inTime">            
-        </div>
-        <div class="col-1">            
-            <input type="time" [(ngModel)]="outTime">
-        </div>
-        <div class="col-2">
+       
+        <div class="col-8 d-flex  align-content-center justify-content-around">
+            <div class="bmr flex-fill ">
+                <label for="" class="py-1">Month : </label>
+                <select  [(ngModel)]="datarow.mn" (change)="getAttendence()" class="py-1">
+                    <optgroup label="2022">
+                        <option value="10_2022">10-2022</option>
+                        <option value="9_2022">09-2022</option>
+                        <option value="8_2022">08-2022</option>
+                        <option value="7_2022">07-2022</option>
+                        <option value="6_2022">06-2022</option>
+                        <option value="5_2022">05-2022</option>
+                        <option value="4_2022">04-2022</option>
+                        <option value="3_2022">03-2022</option>
+                        <option value="1_2022">01-2022</option>
+                    </optgroup>
+                    <optgroup label="2021">
+                        <option value="11_2021">11-2021</option>
+                        <option value="12_2021">12-2021</option>
+                    </optgroup>
+                </select>
+            </div>
+            <div class="bmr flex-fill">
+                <input type="time"  [(ngModel)]="inTime" class="p-1"> 
+                <input type="time" [(ngModel)]="outTime" class="p-1">
+            </div>
+            
+
             <button class="btn btn-success" (click)="getAttendence()">Get Data</button>
         </div>
+       
     </div>       
     <div *ngIf="!allemp">
         <table *ngIf="dataList">
-            <caption>{{tcaption}}</caption>
+            <!-- <caption>{{tcaption}}</caption> -->
+           
             <tr>
                 <th>Date</th>
                 <th>In time</th>
                 <th>Out time</th>
             </tr>
             <tr *ngFor="let z of dataList ">
-                <td>{{z.logDate}}</td>
+                <td>{{z.logDate}} {{dispWeek(z.logDate, 3)}}</td>
                 <td [class]="inTimeClass(z)">
                     <i class="fa fa-clock-o" aria-hidden="true"></i>
                      {{z.inTime}}
@@ -63,26 +72,27 @@
     </div>
     <div  *ngIf="allemp">
         <!-- {{dataList.15[0].01|json}} -->
-        <table *ngIf="dataList">
+        <table *ngIf="dataListALL">
+            <colgroup>
+                <col>
+                <col *ngFor = "let w of days" [class]="dispWeek(w,2)" >                
+              </colgroup>
             <tr>
                 <th>Employee</th>
-                <th *ngFor = "let d of days">{{d}}</th>             
-            <tr *ngFor="let z of dataList ">
+                <th *ngFor = "let d of days">{{d}} {{dispWeek(d,2)}}</th>             
+            <tr *ngFor="let z of dataListALL ">
 
-                <td>{{dispEmp(z['UserID'])}}</td>                 
+                <td>
+                    <disp-Emp [emp]="dispEmp(z['UserID'])" (click)="empAtd(z['UserID'])"></disp-Emp>
+                </td>                 
                 <td *ngFor = "let d of days">
                     <div [class.red]="dispIntime(z['dt'][d])[1]">{{dispIntime(z['dt'][d])[0]}} </div> 
-                    <div [class.red]="dispOuttime(z['dt'][d])[1]">{{dispOuttime(z['dt'][d])[0]}}</div>
-
-                  
+                    <div [class.red]="dispOuttime(z['dt'][d])[1]">{{dispOuttime(z['dt'][d])[0]}}</div>                  
                 </td>
               
                 
 
             </tr>
-        </table>
-        
-
-        
+        </table>               
     </div>
 </div>

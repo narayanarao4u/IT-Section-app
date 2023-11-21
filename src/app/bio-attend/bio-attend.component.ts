@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../data.service';
+import { AppDataService } from '../data.service';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -14,43 +14,51 @@ export class BioAttendComponent implements OnInit {
   empdata:any;
   datarow = {
     emp:"100",
-    mn:"8_2022"
+    mn:"10_2022",
+    role:'ALL'
   }
   dataList:Array<any>
+  dataListALL:Array<any>
   tcaption:any
-  inTime = '11:01';
-  outTime = '17:29';
+  inTime = '10:30';
+  outTime = '17:30';
 
   allemp = false
 
   days = ['01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31']
    
-  constructor(private ds:DataService, private http:HttpClient) { }
+  constructor(private ds:AppDataService, private http:HttpClient) { }
 
+  
   getempdata(){
-    const url = `http://${this.link}:3005/api-attend/empdata`;
+    const url = `http://${this.link}:${this.ds.port}/api-attend/empdata`;
     this.ds.getdataLink(url).subscribe((res)=>{
       this.empdata = res;      
     })
   }
 
   getAttendence(){
-    // console.log('datarow', this.datarow);
+    //console.log('datarow', this.datarow);
     
-    const url = `http://${this.link}:3005/api-attend/memdata`;
+    const url = `http://${this.link}:${this.ds.port}/api-attend/memdata`;
 
-    this.allemp = this.datarow.emp === '100'? true : false
+    this.allemp = this.datarow.emp === '100'? true : false    
 
-     
+  
+
+    console.log(this.datarow);
+
+    
 
     this.http.post(url, this.datarow).subscribe((res:Array<any>)=>{
-      this.dataList = res
+     
       //console.log(res);
 
       if (this.allemp) {
         // console.log( this.allemp);
         let a = []
-        a = this.dataList
+        // a = this.dataList
+        a = res
         // console.log(typeof a[0].logDate);      
         let pv = a.reduce((a, b) => {
           a[b.UserID] = a[b.UserID] || [];
@@ -61,18 +69,38 @@ export class BioAttendComponent implements OnInit {
         var pvs = Object.keys(pv).map(function (k) {
           return { UserID: k, dt: Object.assign.apply({}, pv[k]) };
         });
-        this.dataList = pvs
+        this.dataListALL = pvs
+        this.dataList = null
         // console.log(this.dataList);
         
+      } else {
+        this.dataList = res
+        this.dataListALL = null
+        this.tcaption = `Name : ${this.datarow.emp}, Month :  ${this.datarow.mn}`  
       }
-
+         
+     //console.log(this.dataList);
       
-    
-    // console.log("pvs", pvs);
-      
-    this.tcaption = `Name : ${this.datarow.emp}, Month :  ${this.datarow.mn}`        
+          
     
   })
+  }
+
+  empAtd(id) {
+    this.datarow.emp = id;
+    this.getAttendence()
+  }
+
+  dispWeek(x, n){
+    let t =  this.datarow.mn.split("_")
+    let t2;
+    if(n === 2){
+      t2 = new Date(`${t[1]}-${t[0]}-${x}`).toString()
+    } else if (n === 3) {
+      t2 = new Date(x).toString()
+    } 
+    
+    return t2.substr(0,n)
   }
 
 
@@ -129,7 +157,7 @@ export class BioAttendComponent implements OnInit {
    let emp = this.empdata.find(o => o.EmployeeCode === x);
   
    
-   return(emp.EmployeeName)
+   return(emp)
   //   AadhaarNumber: "201900071"
   // Designation: "JAO"
   // EmployeeCode: "49"
@@ -158,7 +186,8 @@ export class BioAttendComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getempdata()    
+    this.getempdata()  
+    this.datarow.role = sessionStorage.getItem('role')  
   }
 
 }

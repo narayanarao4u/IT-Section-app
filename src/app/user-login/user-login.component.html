@@ -8,16 +8,17 @@
                 <form  class="form">
                     <div class="form-group">
                         <label for="">HRMS No</label>
-                        <input type="text" [(ngModel)]="userData.erpno"  (keyup) = "onKeyup($event)"
+                        <input type="text" [(ngModel)]="userData.AadhaarNumber"  (keyup) = "onKeyup($event)"
                                 name="erpno" class="form-control rounded-0" required>
                     </div>
                     <div class="form-group">
                         <label for="">Name</label>
-                        <input type="text" [(ngModel)]="userData.name" name="name"class="form-control rounded-0" disabled>
+                        <input type="text" [(ngModel)]="userData.EmployeeName" name="name"class="form-control rounded-0" disabled>
                     </div>
                     <div class="form-group">
                         <label for="">Password</label>
-                        <input type="password" [(ngModel)]="userData.pwd" name="pwd" class="form-control rounded-0" required>
+                        <input type="password" [(ngModel)]="userData.pwd" name="pwd" class="form-control rounded-0" required 
+                                [placeholder]="PlaceHolder" [disabled]="isDisables">
                     </div>
                     <button type="button" (click)="login()" class="btn btn-success float-right mt-1">Login</button>
                 </form>

@@ -1,13 +1,16 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { AppDataService } from "../data.service";
 
 @Injectable({
     providedIn: 'root'
 })
 export class IpDataService {
     link = window.location.hostname
-    port = 3005
-    constructor(private http: HttpClient) { }
+    
+    constructor(private http: HttpClient, private ds: AppDataService) { }
+
+    port = this.ds.port
 
     // #region ipData
     getipData() {
@@ -30,6 +33,11 @@ export class IpDataService {
     delipData(id) {
         let url = `http://${this.link}:${this.port}/api/ipData/`;
         return this.http.delete(url + id)
+    }
+
+    checkIPStatus(ipAddress){
+        let url = `http://${this.link}:${this.port}/api/checkPing?ip=${ipAddress}`;
+        return this.http.get(url)
     }
     // #endregion ipData 
 

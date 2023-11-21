@@ -14,14 +14,17 @@ import { Error404Component } from './errors/404.component';
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
 import { BioAttendComponent } from './bio-attend/bio-attend.component';
+import { DispEmpComponent } from './bio-attend/dispEmp.component';
+import { changepwdComponent } from './user-login/changepwd.component';
+import { PcinfoComponent } from './pcinfo/pcinfo.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AppNavComponent,
     Error404Component,
-    BioAttendComponent,    
-    DispTableComponent, UserRegisterComponent, UserLoginComponent
+    BioAttendComponent, DispEmpComponent,
+    DispTableComponent, UserRegisterComponent, UserLoginComponent, changepwdComponent, PcinfoComponent
   ],
   imports: [
     BrowserModule,

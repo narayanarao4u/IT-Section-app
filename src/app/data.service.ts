@@ -5,9 +5,10 @@ import { Injectable } from "@angular/core";
     providedIn:'root'
 })
 
-export class DataService {
+export class AppDataService {
     link = window.location.hostname;
-    
+    port = 3005;
+     
 
     constructor(private http: HttpClient){}
 

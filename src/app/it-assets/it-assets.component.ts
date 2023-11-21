@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Assest } from './asset';
-import { DataService } from './data.service';
+import { ItAssetDataService } from './ItAssestdata.service';
 
 declare let toastr
 @Component({
@@ -13,7 +13,7 @@ export class ItAssetsComponent implements OnInit {
   dataRow:Assest;
   user:any;
   section:any;
-  constructor(private ds: DataService) { }
+  constructor(private ds: ItAssetDataService) { }
 
   getlist(){
     this.dataRow = new Assest();

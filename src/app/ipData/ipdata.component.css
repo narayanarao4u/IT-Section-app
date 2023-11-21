@@ -9,3 +9,12 @@
     padding: 2px;
     
 }
+
+.ip {
+    cursor: pointer;
+}
+
+.ip:hover {
+    font-weight: bolder;
+    background-color: lightpink;
+}

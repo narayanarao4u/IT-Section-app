@@ -3,11 +3,11 @@ import { AuthService } from '../auth.service';
 import { AppDataService } from '../data.service';
 
 @Component({
-  selector: 'app-disp-table',
-  templateUrl: './disp-table.component.html',
-  styleUrls: ['./disp-table.component.css']
+  selector: 'app-pcinfo',
+  templateUrl: './pcinfo.component.html',
+  styleUrls: ['./pcinfo.component.css']
 })
-export class DispTableComponent implements OnInit {
+export class PcinfoComponent implements OnInit {
   link = window.location.hostname;
   dataList:any;
   datarow:any;
@@ -15,7 +15,7 @@ export class DispTableComponent implements OnInit {
   constructor(private ds:AppDataService, public auth:AuthService) { }
 
   getdata(){
-    const url = `http://${this.link}:${this.ds.port}/api-pcinfo`;
+    const url = `http://${this.link}:${this.ds.port}/api-pcinfo/data`;
     console.log(url);
     
     this.ds.getdataLink(url).subscribe((res)=>{
@@ -27,6 +27,10 @@ export class DispTableComponent implements OnInit {
 
   objectKeys(obj) {
     return Object.keys(obj);
+  }
+
+  Roundup(i){
+    return Math.ceil(i)
   }
 
   ngOnInit(): void {

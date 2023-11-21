@@ -1,12 +1,17 @@
-<div class="container">
-    <p>disp-table works!</p>
-<!-- 
-    <table *ngIf="dataList['duty']">
-        <tr  *ngFor = "let x of dataList['duty']"> 
-            <td *ngFor = "let i of objectKeys(x)">
-                {{objectKeys(x)}}
-            </td>
-            <td>{{ x | json  }}</td>      
+<div >
+    <h3>WelCome : {{auth.getCurrentUser()?.name}}</h3>
+     
+    <hr>
+
+    <table *ngIf="dataList">
+        <tr> 
+            <th *ngFor = "let x of datarow"> {{x}} </th>
         </tr>
-    </table> -->
+        <tr  *ngFor = "let x of dataList"> 
+            <td *ngFor = "let i of objectKeys(x)">
+                {{x[i]}}
+            </td>
+               
+        </tr>
+    </table>
 </div>

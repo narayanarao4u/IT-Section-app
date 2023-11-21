@@ -14,6 +14,4 @@ export class TelePhoneRowComponent {
     clickEvent(){
         this.eventClick.emit(this.dataRow.Name)
     }
-
-
 }
