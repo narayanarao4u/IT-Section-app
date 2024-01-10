@@ -1,31 +1,53 @@
 <div >
     <div class="d-flex justify-content-between">
-        <h4>PC Info : {{dataList?.length}} </h4>
-        <h4 *ngIf="auth.getCurrentUser()?.name">User : {{auth.getCurrentUser()?.name}}</h4>
+        <div>
+            <h4>PC Info : {{dataList?.length}} </h4>
+            <h4 *ngIf="auth.getCurrentUser()?.name">User : {{auth.getCurrentUser()?.name}}</h4>
+        </div>
+        <div>
+            <button (click)="minview = !minview" class="btn btn-primary btn-sm">show less</button>
+        </div>
     </div>    
-    <div *ngIf="dataList" class="maincontainer">
-        <div *ngFor = "let x of dataList"  class=" item border border-primary px-2">
-            <div><i class="fa fa-user" aria-hidden="true"></i> <span>  Name</span> </div> <div><strong>{{x.empname | uppercase}}</strong></div>
-            <div><i class="fa fa-address-book-o" aria-hidden="true"></i><span> HRMS  NO</span></div> <div>{{x.hrmsno}}</div>
-            <div><i class="fa fa-phone-square" aria-hidden="true"></i>  <span> Phone</span></div> <div>{{x.phone}}</div>
-            <div><i class="fa fa-street-view" aria-hidden="true"></i> <span> Location</span></div> <div>{{x.locationtxt}}</div>
-            <div><i class="fa fa-barcode" aria-hidden="true"></i>  <span> MACAddress</span></div> <div class="blur">{{x.MACAddress }}</div>
-            <div><i class="fa fa-building" aria-hidden="true"></i> <span> IPv4Address</span></div> <div>{{x.IPv4Address}}</div>
-            <div><i class="fa fa-bookmark-o" aria-hidden="true"></i> Host <span> Name</span></div> <div>{{x.Hostname}}</div>            
-            <div><i class="fa fa-industry" aria-hidden="true"></i>  <span> Manufacturer</span></div> <div>{{x.SystemManufacturer}}</div>
-            <div><i class="fa fa-asterisk" aria-hidden="true"></i> <span> Model</span></div> <div>{{x.SystemModel}}</div>
-            <div><i class="fa fa-at" aria-hidden="true"></i> <span> UserName</span></div> <div>{{x.SystemUserName}}</div>
-            <div><i class="fa fa-microchip" aria-hidden="true"></i>  <span> Processor</span></div> <div>{{x.ProcessorName}}</div>
-            <div><i class="fa fa-server" aria-hidden="true"></i> <span> RAM</span> </div><div>{{Roundup(x.RAM_GB)}} GB</div>
-            <div><i class="fa fa-credit-card" aria-hidden="true"></i> <span> SerialNumber</span></div> <div>{{x.SerialNumber}}</div>
-            <div><i class="fa fa-university" aria-hidden="true"></i>  <span> Manufacturer</span></div> <div>{{x.Manufacturer}}</div>
-            <div><i class="fa fa-windows" aria-hidden="true"></i>  <span> OS</span></div> <div>{{x.OS_Name}}</div>
-            <div class="borderbottom"><i class="fa fa-info-circle " aria-hidden="true"></i>  <span> Version</span></div> <div class="borderbottom">{{x.OS_Version}}</div>
-            <!-- <div><hr></div><div><hr></div> -->
-            <div><i class="fa fa-print" aria-hidden="true"></i> <span> Printer</span> </div><div>{{x.prnMake}}</div>
-            <div><span>Model</span> </div><div>{{x.prnModel}}</div>
-            <div><span>Serial No</span> </div><div>{{x.prnSerialNo}}</div>
+    <div *ngIf="dataList">
+        <div *ngIf="minview"  class="maincontainer">
+            <div *ngFor = "let x of dataList"  class=" item border border-primary px-2" >
+                <div><i class="fa fa-user" aria-hidden="true"></i> <span>  Name</span> </div> <div><strong>{{x.empname | uppercase}}</strong></div>
+                <div><i class="fa fa-address-book-o" aria-hidden="true"></i><span> HRMS  NO</span></div> <div>{{x.hrmsno}}</div>
+                <div><i class="fa fa-phone-square" aria-hidden="true"></i>  <span> Phone</span></div> <div>{{x.phone}}</div>
+                <div><i class="fa fa-street-view" aria-hidden="true"></i> <span> Location</span></div> <div>{{x.locationtxt}}</div>
+                <div><i class="fa fa-barcode" aria-hidden="true"></i>  <span> MACAddress</span></div> <div class="blur">{{x.MACAddress }}</div>
+                <div><i class="fa fa-building" aria-hidden="true"></i> <span> IPv4Address</span></div> <div (click)="checkIP(x)" role="button">{{x.IPv4Address}}
+                                                                                                 <i class="fa fa-square-o "  [ngClass] ="x.class" aria-hidden="true"></i> {{x.status}}
+                                                                                                </div>
+                <div><i class="fa fa-bookmark-o" aria-hidden="true"></i> Host <span> Name</span></div> <div>{{x.Hostname}}</div>
+                <div><i class="fa fa-industry" aria-hidden="true"></i>  <span> Manufacturer</span></div> <div>{{x.SystemManufacturer}}</div>
+                <div><i class="fa fa-asterisk" aria-hidden="true"></i> <span> Model</span></div> <div>{{x.SystemModel}}</div>
+                <div><i class="fa fa-at" aria-hidden="true"></i> <span> UserName</span></div> <div>{{x.SystemUserName}}</div>
+                <div><i class="fa fa-microchip" aria-hidden="true"></i>  <span> Processor</span></div> <div>{{x.ProcessorName}}</div>
+                <div><i class="fa fa-server" aria-hidden="true"></i> <span> RAM</span> </div><div>{{Roundup(x.RAM_GB)}} GB</div>
+                <div><i class="fa fa-credit-card" aria-hidden="true"></i> <span> SerialNumber</span></div> <div>{{x.SerialNumber}}</div>
+                <div><i class="fa fa-university" aria-hidden="true"></i>  <span> Manufacturer</span></div> <div>{{x.Manufacturer}}</div>
+                <div><i class="fa fa-windows" aria-hidden="true"></i>  <span> OS</span></div> <div>{{x.OS_Name}}</div>
+                <div class="borderbottom"><i class="fa fa-info-circle " aria-hidden="true"></i>  <span> Version</span></div> <div class="borderbottom">{{x.OS_Version}}</div>
+                <!-- <div><hr></div><div><hr></div> -->
+                <div><i class="fa fa-print" aria-hidden="true"></i> <span> Printer</span> </div><div>{{x.prnMake}}</div>
+                <div><span>Model</span> </div><div>{{x.prnModel}}</div>
+                <div><span>Serial No</span> </div><div>{{x.prnSerialNo}}</div>
+            
+            </div>
+        </div>
+        <div *ngIf="!minview" class="container-fluid">
+            <div *ngFor = "let x of dataList" class="row">
+                <div class="col" (click)="checkIP(x)" role="button">{{x.IPv4Address}}  
+                    <i class="fa fa-square-o "  [ngClass] ="x.class" aria-hidden="true"></i> {{x.status}}
+                </div>  
+                <div class="col">{{x.MACAddress }}</div>
+                <div class="col">{{x.locationtxt}}</div>
+                <div class="col">{{x.Manufacturer}}</div>
+            </div>
             
         </div>
+        
+
     </div>
 </div>

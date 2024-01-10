@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { AppDataService } from '../data.service';
+import { IpDataService } from '../ipData/ipdata.service';
 
 @Component({
   selector: 'app-pcinfo',
@@ -11,8 +12,9 @@ export class PcinfoComponent implements OnInit {
   link = window.location.hostname;
   dataList:any;
   datarow:any;
+  minview = true;
 
-  constructor(private ds:AppDataService, public auth:AuthService) { }
+  constructor(private ds:AppDataService, private dsip:IpDataService, public auth:AuthService) { }
 
   getdata(){
     const url = `http://${this.link}:${this.ds.port}/api-pcinfo/data`;
@@ -32,6 +34,15 @@ export class PcinfoComponent implements OnInit {
   Roundup(i){
     return Math.ceil(i)
   }
+
+  checkIP(x){
+
+    return this.dsip.checkIPStatus(x.IPv4Address).subscribe(res => {      
+      let a = res['isAlive']
+      x.status = a ? 'Online' : 'Offline'
+      x.class = a ?'bg-success': 'bg-danger'
+    })    
+}
 
   ngOnInit(): void {
     //this.dataList['duty'] = ""
